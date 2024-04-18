@@ -14,6 +14,15 @@ class Flags:
         self.N = dictionary['N']
         self.H = dictionary['H']
         self.C = dictionary['C']
+    
+    def getInfo(self):
+        print(f'FLAGS')
+        print(f'--> Z: {self.Z}')
+        print(f'--> N: {self.N}')
+        print(f'--> H: {self.H}')
+        print(f'--> C: {self.C}')
+
+
 
 class Operand:
     name:str
@@ -25,6 +34,12 @@ class Operand:
         self.name = dictionary['name']
         self.bytes = dictionary.get('bytes')
         self.immediate = dictionary['immediate']
+    
+    def getInfo(self):
+        print(f'OPERAND')
+        print(f'--> Name: {self.name}')
+        print(f'--> Bytes: {self.bytes}')
+        print(f'--> Immediate: {self.immediate}')
 
 class Instruction:
     opcode:int
@@ -43,6 +58,18 @@ class Instruction:
         self.operands = operands
         self.immediate = dictionary['immediate']
         self.flags = flags
+    
+    def getInfo(self):
+        print(f'OpCode: {hex(self.opcode)}')
+        print(f'Name: {self.name}')
+        print(f'Bytes: {self.bytes}')
+        print(f'Cycles: {self.cycles}')
+        for operand in self.operands:
+            operand.getInfo()
+        print(f'Immediate: {self.immediate}')
+        self.flags.getInfo()
+
+        
 
 #Global Variable    
 
@@ -68,4 +95,4 @@ def parse_opcodes():
     #         OperandsObj.append(OperandObj)
     #     InstructionObj = Instruction(data['prefixed'][instrucion], instrucion, OperandsObj, FlagsObj)
     #     InstructionsObj.append(InstructionObj)
-parse_opcodes()
+
