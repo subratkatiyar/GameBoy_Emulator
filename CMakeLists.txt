@@ -9,6 +9,7 @@ set(SOURCES
     src/main.c
     src/memory.c
     src/cpu.c
+    src/INS_load.c
     # Add other source files here as needed
 )
 

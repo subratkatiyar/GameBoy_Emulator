@@ -10,7 +10,9 @@
 #define VRAM_SIZE       0x2000  // Video RAM size (8KB)
 #define ERAM_SIZE       0x2000  // External RAM size (8KB)
 #define WRAM_SIZE       0x2000  // Working RAM size (8KB)
+#define ECHO_RAM        0x1E00  // Echo Ram [New]
 #define OAM_SIZE        0xA0    // Object Attribute Memory size (160 bytes)
+#define NOT_USABLE      0x60    // Not Usable [New]
 #define IO_SIZE         0x80    // I/O Registers size (128 bytes)
 #define HRAM_SIZE       0x7F    // High RAM size (127 bytes)
 
@@ -20,7 +22,9 @@ typedef struct {
     uint8_t vram[VRAM_SIZE];    // Video RAM
     uint8_t eram[ERAM_SIZE];    // External RAM (cartridge RAM)
     uint8_t wram[WRAM_SIZE];    // Working RAM
+    uint8_t echoram[ECHO_RAM];  // Echo Ram [New]
     uint8_t oam[OAM_SIZE];      // Object Attribute Memory
+    uint8_t notuse[NOT_USABLE]; // Not Usable [New]
     uint8_t io[IO_SIZE];        // I/O Registers
     uint8_t hram[HRAM_SIZE];    // High RAM
     uint8_t ie;                 // Interrupt Enable Register

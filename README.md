@@ -43,6 +43,23 @@ Trying to emulate gameboy for understanding how a CPU works in general
 | Ex                 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
 | Fx                 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
 
+# Memory Regions Observartions.
+0x0000 - 0x3FFF = Fixed from cartridge </br>
+0x4000 - 0x7FFF = Switchable from cartridge </br>
+0x8000 - 0x9FFF = VIDEO RAM ?? </br>
+0xA000 - 0xBFFF = 0xFF </br> 
+0xC000 - 0xCFFF = Random </br>
+0xD000 - 0xDFFF = Random </br>
+0xE000 - 0xFDFF = Echo Ram 0xC000 to 0xDDFF </br>
+0xFE00 - 0xFE9F = Random </br>
+0xFEA0 - 0xFEFF = 0x00 </br>
+
+0xFF00 - 0xFF2F = Constant. </br>
+0xFF30 - 0xFF3F = Random. </br>
+0xFF40 - 0xFF7F = Constant. </br>
+
+0xFF80 - 0xFFFE = Random. </br>
+0xFFFF = 0x00 </br>
 
 ## Important Links
 - OPCodes: https://gbdev.io/gb-opcodes/optables/
