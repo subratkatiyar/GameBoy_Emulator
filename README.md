@@ -5,24 +5,24 @@ Trying to emulate gameboy for understanding how a CPU works in general
 
 ## Instructions Set
 
-UnPrefixed | x0                 | x1 | x2                 | x3                 | x4                 | x5                 | x6 | x7 | x8 | x9 | xA | xB | xC                 | xD | xE | xF                
----------- | ------------------ | -- | ------------------ | ------------------ | ------------------ | ------------------ | -- | -- | -- | -- | -- | -- | ------------------ | -- | -- | ------------------
-0x         | :white_check_mark: |    |                    |                    | :white_check_mark: | :white_check_mark: |    |    |    |    |    |    | :white_check_mark:
-1x         | :white_check_mark: |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |   
-2x         | :white_check_mark: |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |   
-3x         |                    |    | :white_check_mark: |                    |                    |                    |    |    |    |    |    |    |                    |    |   
-4x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
-5x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
-6x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
-7x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
-8x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
-9x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
-Ax         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    | :white_check_mark:
-Bx         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
-Cx         |                    |    |                    | :white_check_mark: |                    |                    |    |    |    |    |    |    |                    |    |   
-Dx         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
-Ex         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
-Fx         |                    |    |                    |                    |                    |                    |    |    |    |    |    |    |                    |    |    |                   
+| UnPrefixed | x0                 | x1 | x2                 | x3                 | x4                 | x5                 | x6 | x7 | x8 | x9 | xA | xB                 | xC                 | xD                 | xE | xF                 |
+| ---------- | ------------------ | -- | ------------------ | ------------------ | ------------------ | ------------------ | -- | -- | -- | -- | -- | ------------------ | ------------------ | ------------------ | -- | ------------------ |
+| 0x         | :white_check_mark: |    |                    |                    | :white_check_mark: | :white_check_mark: |    |    |    |    |    | :white_check_mark: | :white_check_mark: |
+| 1x         | :white_check_mark: |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |
+| 2x         | :white_check_mark: |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |
+| 3x         |                    |    | :white_check_mark: |                    |                    |                    |    |    |    |    |    |                    |                    | :white_check_mark: |
+| 4x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |                    |
+| 5x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |                    |
+| 6x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |                    |
+| 7x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |                    |
+| 8x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |                    |
+| 9x         |                    |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |                    |
+| Ax         |                    |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    | :white_check_mark: |
+| Bx         |                    |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |                    |
+| Cx         |                    |    |                    | :white_check_mark: |                    |                    |    |    |    |    |    |                    |                    |                    |    |
+| Dx         |                    |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |                    |
+| Ex         | :white_check_mark: |    |                    |                    |                    |                    |    |    |    |    |    |                    |                    |                    |    |
+| Fx         |                    |    |                    | :white_check_mark: |                    |                    |    |    |    |    |    |                    |                    |                    |    |
 
 | Prefixed ($CB $xx) | x0 | x1 | x2 | x3 | x4 | x5 | x6 | x7 | x8 | x9 | xA | xB | xC | xD | xE | xF |
 | ------------------ | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |

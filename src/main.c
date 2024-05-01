@@ -8,6 +8,13 @@ GameboyRegisters registers;
 
 int main() {
 
+    char buffer[99999];
+    if (setvbuf(stdout, buffer, _IOFBF, sizeof(buffer)) != 0) {
+        perror("Failed to set buffer mode for stdout");
+        return -1;
+    }
+
+
     // Initialize Gameboy
     initialize_gameboy(&memory, &registers);
 
