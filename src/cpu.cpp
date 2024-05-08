@@ -1,4 +1,7 @@
 #include "memory.h"
+#include "INS_load.h"
+#include "INS_jump.h"
+#include "INS_decrease.h"
 #include <stdio.h>
 #include <assert.h>
 
@@ -57,83 +60,11 @@ void execute_no_operation(GameboyRegisters *registers){
     registers->pc = registers->pc + 0x01;
 }
 
-void execute_jump(GameboyMemory *memory, GameboyRegisters *registers){
-    uint16_t addressLoc = registers->pc + 0x01;
-    uint16_t address = read_memory_16_le(memory, addressLoc);
-    printf("JP 0x%04X\n", address); 
-    registers->pc = address;
-}
-
 void execute_xor(GameboyRegisters *registers){
     printf("XOR A\n"); 
     registers->a = 0x00;
     registers->f = 1<<7;
     registers->pc += 0x01;
-}
-
-
-
-void execute_decrease_1(GameboyMemory *memory, GameboyRegisters *registers){
-    printf("DEC B\n");
-    uint8_t original_value = registers->b;
-    (registers->b)--;
-
-    if(registers->b == 0x00 ){
-        registers->f |= (1 << 7);  // Set zero flag (Z = 1)
-    }
-    else{
-        registers->f &= ~(1 << 7); // Clear zero flag (Z = 0)
-    }
-
-    // Set subtraction flag (N = 1) to indicate subtraction operation
-    registers->f |= (1 << 6);  // Set subtraction flag (N = 1)
-
-    // Set half-carry flag (H) if there was a borrow from bit 4 to bit 3
-    if ((original_value & 0x0F) == 0x00) {
-        registers->f |= (1 << 5);  // Set half-carry flag (H = 1)
-    } else {
-        registers->f &= ~(1 << 5); // Clear half-carry flag (H = 0)
-    }
-
-    registers->pc += 0x01;
-}
-
-void execute_decrease_2(GameboyMemory *memory, GameboyRegisters *registers){
-    printf("DEC C\n");
-    uint8_t original_value = registers->c;
-    (registers->c)--;
-
-    if(registers->c == 0x00 ){
-        registers->f |= (1 << 7);  // Set zero flag (Z = 1)
-    }
-    else{   
-        registers->f &= ~(1 << 7); // Clear zero flag (Z = 0)
-    }
-
-    // Set subtraction flag (N = 1) to indicate subtraction operation
-    registers->f |= (1 << 6);  // Set subtraction flag (N = 1)
-
-    // Set half-carry flag (H) if there was a borrow from bit 4 to bit 3
-    if ((original_value & 0x0F) == 0x00) {
-        registers->f |= (1 << 5);  // Set half-carry flag (H = 1)
-    } else {
-        registers->f &= ~(1 << 5); // Clear half-carry flag (H = 0)
-    }
-
-    registers->pc += 0x01;
-}
-
-void execute_conditional_jump_1(GameboyMemory *memory, GameboyRegisters *registers){
-    uint16_t valueLoc = registers->pc + 0x01;
-    registers->pc += 0x01;
-    int8_t value = (int8_t)read_memory(memory, valueLoc); // Unsigned to signed 
-    registers->pc += 0x01;
-    printf("JR NZ 0x%02X\n", (registers->pc+(int8_t)value)); 
-
-
-    if((registers->f & (1<<7)) == 0x00){
-        registers->pc +=  value;
-    }
 }
 
 void execute_return(GameboyMemory *memory, GameboyRegisters *registers){
@@ -167,47 +98,33 @@ void execute_instruction(GameboyMemory *memory, GameboyRegisters *registers, uin
             execute_no_operation(registers);
             break;
         case 0xC3:
-            execute_jump(memory, registers);
+        case 0x20:
+            execute_jump(memory, registers, opcode);
             break;
         case 0xAF:
             execute_xor(registers);
             break;
         case 0x21:
-            execute_load_1(memory, registers);
-            break;
         case 0x0E:
-            execute_load_2(memory, registers);
-            break;
         case 0x06:
-            execute_load_3(memory, registers);
-            break;
         case 0x32:
-            execute_load_4(memory, registers);
+        case 0x3E:
+        case 0xE0:
+        case 0xF0:
+            execute_load(memory, registers, opcode);
             break;
         case 0x05:
-            execute_decrease_1(memory, registers);
-            break;
-        case 0x20:
-            execute_conditional_jump_1(memory, registers);
-            break;
         case 0x0D:
-            execute_decrease_2(memory, registers);
+            execute_decrease(memory, registers, opcode);
             break;
-        case 0x3E:
-            execute_load_6(memory, registers);
-            break;
+
+        
+        
+        
         case 0xF3:
             execute_disable_interrupts(registers);
             break;
-        case 0xE0:
-            execute_load_7(memory, registers);
-            break;
-        case 0xF0:
-            execute_load_8(memory, registers);
-            break;
-        case 0xFE:
-            execute_compare_1(memory, registers);
-            break;
+        
         // case 0x69:
         //     execute_load_5(memory, registers);
         //     break;
@@ -219,4 +136,5 @@ void execute_instruction(GameboyMemory *memory, GameboyRegisters *registers, uin
             break;
     }
     get_registers_value(registers);
+    fflush(stdout);
 }

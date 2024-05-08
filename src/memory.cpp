@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-
+#include "INS_load.h"
 // Flag constants
 #define FLAG_Z 0b10000000 // Zero flag
 #define FLAG_N 0b01000000 // Subtract flag
@@ -21,7 +21,7 @@ void dump_memory(GameboyMemory *memory, uint16_t startAddr, uint16_t size){
 }
 void initialize_memory_regions(GameboyMemory *memory){
     memset(memory->eram, 0xFF, sizeof(memory->eram));
-    memset(memory->notuse, 0x00, sizeof(memory->eram));
+    memset(memory->notuse, 0x00, sizeof(memory->notuse)); // Careful with memset.
 
     uint8_t IORegister[] = {
         0xcf, 0x00, 0x7e, 0xff, 0xab, 0x00, 0x00, 0xf8,
@@ -152,6 +152,9 @@ uint16_t read_memory_16_le(GameboyMemory *memory, uint16_t pc) {
 
 // Function to write to memory
 void write_memory(GameboyMemory *memory, uint16_t address, uint8_t value) {
+    if(address == 0xFF44){
+        printf("%d", value);
+    }
     if (address < ROM_SIZE) {
         memory->rom[address] = value;
     } else if (address < ROM_SIZE + VRAM_SIZE) {
@@ -176,6 +179,12 @@ void write_memory(GameboyMemory *memory, uint16_t address, uint8_t value) {
 }
 
 int load_rom(GameboyMemory *memory, const char *filename){
+
+    if (filename == NULL) {
+        fprintf(stderr, "Error: Filename is NULL\n");
+        return -1;
+    }
+
     FILE *file = fopen(filename, "rb");
     if (file == NULL) {
         fprintf(stderr, "Error: Unable to open ROM file '%s'\n", filename);

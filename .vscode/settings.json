@@ -1,0 +1,13 @@
+{
+    "cmake.configureOnOpen": true,
+    "files.associations": {
+        "memory.h": "c",
+        "compare": "c",
+        "stdio.h": "c",
+        "ins_decrease.h": "c",
+        "ins_load.h": "c",
+        "display.h": "c",
+        "sdl.h": "c",
+        "cpu.h": "c"
+    }
+}

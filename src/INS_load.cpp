@@ -62,8 +62,34 @@ void execute_load_8(GameboyMemory *memory, GameboyRegisters *registers){
     uint16_t valueLoc = registers->pc + 0x01;
     uint8_t value = read_memory(memory, valueLoc);
     uint16_t address = 0xFF00 + value;
-    value = read_memory(memory, address);
     printf("LOAD A, FF00+ 0x%02X, A\n", value); 
+    value = read_memory(memory, address);
     registers->a = value;
     registers->pc += 0x02;
+}
+
+void execute_load(GameboyMemory *memory, GameboyRegisters *registers, uint8_t opcode){
+    switch(opcode){
+        case 0x21:
+            execute_load_1(memory, registers);
+            break;
+        case 0x0E:
+            execute_load_2(memory, registers);
+            break;
+        case 0x06:
+            execute_load_3(memory, registers);
+            break;
+        case 0x32:
+            execute_load_4(memory, registers);
+            break;
+        case 0x3E:
+            execute_load_6(memory, registers);
+            break;
+        case 0xE0:
+            execute_load_7(memory, registers);
+            break;
+        case 0xF0:
+            execute_load_8(memory, registers);
+            break;
+    }
 }
