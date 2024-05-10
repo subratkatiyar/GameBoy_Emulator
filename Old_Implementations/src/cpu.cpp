@@ -1,39 +1,38 @@
 #include "memory.h"
-#include "INS_load.h"
-#include "INS_jump.h"
-#include "INS_decrease.h"
-#include <stdio.h>
+// #include "INS_load.h"
+// #include "INS_jump.h"
+// #include "INS_decrease.h"
 #include <assert.h>
 
-void dump_memory_to_file(const char* filename, const GameboyMemory* memory) {
-    // Open the file in binary write mode
-    FILE* file = fopen(filename, "wb");
-    if (file == NULL) {
-        fprintf(stderr, "Error opening file %s\n", filename);
-        return;
-    }
+// void dump_memory_to_file(const char* filename, const GameboyMemory* memory) {
+//     // Open the file in binary write mode
+//     FILE* file = fopen(filename, "wb");
+//     if (file == NULL) {
+//         fprintf(stderr, "Error opening file %s\n", filename);
+//         return;
+//     }
     
-    // Write each memory section to the file
-    size_t total_bytes_written = 0;
-    // total_bytes_written += fwrite(memory->rom, 1, ROM_SIZE, file);
-    total_bytes_written += fwrite(memory->vram, 1, VRAM_SIZE, file);
-    // total_bytes_written += fwrite(memory->eram, 1, ERAM_SIZE, file);
-    // total_bytes_written += fwrite(memory->wram, 1, WRAM_SIZE, file);
-    // total_bytes_written += fwrite(memory->oam, 1, OAM_SIZE, file);
-    // total_bytes_written += fwrite(memory->io, 1, IO_SIZE, file);
-    // total_bytes_written += fwrite(memory->hram, 1, HRAM_SIZE, file);
-    // total_bytes_written += fwrite(&(memory->ie), 1, sizeof(uint8_t), file);
+//     // Write each memory section to the file
+//     size_t total_bytes_written = 0;
+//     // total_bytes_written += fwrite(memory->rom, 1, ROM_SIZE, file);
+//     total_bytes_written += fwrite(memory->vram, 1, VRAM_SIZE, file);
+//     // total_bytes_written += fwrite(memory->eram, 1, ERAM_SIZE, file);
+//     // total_bytes_written += fwrite(memory->wram, 1, WRAM_SIZE, file);
+//     // total_bytes_written += fwrite(memory->oam, 1, OAM_SIZE, file);
+//     // total_bytes_written += fwrite(memory->io, 1, IO_SIZE, file);
+//     // total_bytes_written += fwrite(memory->hram, 1, HRAM_SIZE, file);
+//     // total_bytes_written += fwrite(&(memory->ie), 1, sizeof(uint8_t), file);
     
-    // Check if all bytes were written
-    if (total_bytes_written != ROM_SIZE + VRAM_SIZE + ERAM_SIZE + WRAM_SIZE + OAM_SIZE + IO_SIZE + HRAM_SIZE + sizeof(uint8_t)) {
-        fprintf(stderr, "Error writing memory to file\n");
-    } else {
-        printf("Memory dumped successfully to %s\n", filename);
-    }
+//     // Check if all bytes were written
+//     if (total_bytes_written != ROM_SIZE + VRAM_SIZE + ERAM_SIZE + WRAM_SIZE + OAM_SIZE + IO_SIZE + HRAM_SIZE + sizeof(uint8_t)) {
+//         fprintf(stderr, "Error writing memory to file\n");
+//     } else {
+//         printf("Memory dumped successfully to %s\n", filename);
+//     }
     
-    // Close the file
-    fclose(file);
-}
+//     // Close the file
+//     fclose(file);
+// }
 
 
 void execute_unimplemented(GameboyMemory *memory) {

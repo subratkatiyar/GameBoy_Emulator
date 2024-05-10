@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(GameboyEmulator)
+project(GameboyEmulator CXX)
 
 # Set C standard to C11
 set(CMAKE_C_STANDARD 11)
@@ -13,7 +13,14 @@ FetchContent_Declare(SFML
     GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-file(GLOB SOURCES "src/*.cpp")
+# file(GLOB SOURCES "src/*.cpp")
+# Set source files
+set(SOURCES 
+    src/main.cpp
+    # src/memory.cpp
+    src/display.cpp
+    # Add other source files here as needed
+)
 
 # Include directories
 include_directories(include)

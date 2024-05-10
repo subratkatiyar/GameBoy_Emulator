@@ -1,6 +1,3 @@
-#ifndef MEMORY_H
-#define MEMORY_H
-
 #include <stdint.h>
 
 // Define memory regions and sizes
@@ -80,6 +77,5 @@ void write_memory(GameboyMemory *memory, uint16_t addr, uint8_t value);
 
 // Load ROM into memory
 int load_rom(GameboyMemory *memory, const char *filename);
-
-
-#endif /* MEMORY_H */
+// Load VRAM into memory
+int load_vram(GameboyMemory *memory, const char *filename);

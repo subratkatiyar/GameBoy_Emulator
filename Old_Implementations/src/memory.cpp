@@ -1,22 +1,25 @@
 #include "memory.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
-#include "INS_load.h"
+// #include "INS_load.h"
+#include <iostream>
+#include <cstring>
+#include <fstream>
+#include <vector>
+#include <cstddef>
+#include <cstdint>
+
 // Flag constants
 #define FLAG_Z 0b10000000 // Zero flag
 #define FLAG_N 0b01000000 // Subtract flag
 #define FLAG_H 0b00100000 // Half-carry flag
 #define FLAG_C 0b00010000 // Carry flag
 
-
 void dump_memory(GameboyMemory *memory, uint16_t startAddr, uint16_t size){
     for (uint16_t i = startAddr; i < startAddr+size; i += 16) {
         for (uint16_t j = 0; j < 16; j++) {
-            printf("%02X ", read_memory(memory, i+j));
+            // printf("%02X ", read_memory(memory, i+j));
         }
-        printf("\n");
+        // printf("\n");
     }
 }
 void initialize_memory_regions(GameboyMemory *memory){
@@ -152,9 +155,6 @@ uint16_t read_memory_16_le(GameboyMemory *memory, uint16_t pc) {
 
 // Function to write to memory
 void write_memory(GameboyMemory *memory, uint16_t address, uint8_t value) {
-    if(address == 0xFF44){
-        printf("%d", value);
-    }
     if (address < ROM_SIZE) {
         memory->rom[address] = value;
     } else if (address < ROM_SIZE + VRAM_SIZE) {
@@ -180,27 +180,52 @@ void write_memory(GameboyMemory *memory, uint16_t address, uint8_t value) {
 
 int load_rom(GameboyMemory *memory, const char *filename){
 
-    if (filename == NULL) {
-        fprintf(stderr, "Error: Filename is NULL\n");
-        return -1;
+    std::ifstream file(filename, std::ios::binary);
+
+    if (!file.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return 1;
     }
 
-    FILE *file = fopen(filename, "rb");
-    if (file == NULL) {
-        fprintf(stderr, "Error: Unable to open ROM file '%s'\n", filename);
-        return -1;
+    file.read(reinterpret_cast<char*>(memory->rom), ROM_SIZE);
+
+
+    if (!file) {
+        std::cerr << "Error reading file: " << filename << std::endl;
+        return 1;
     }
 
-    // Read ROM data into memory.rom
-    printf("ROM file found: Reading into memory\n");
-    size_t bytesRead = fread(memory->rom, sizeof(uint8_t), ROM_SIZE, file);
-    fclose(file);
+    // Output the number of bytes read
+    std::cout << "Read " << file.gcount() << " bytes from " << filename << std::endl;
 
-    if (bytesRead != ROM_SIZE) {
-        fprintf(stderr, "Error: Failed to read ROM file '%s'\n", filename);
-        return -1;
+    // Close the file
+    file.close();
+
+    return 0;
+}
+
+int load_vram(GameboyMemory *memory, const char *filename){
+
+    std::ifstream file(filename, std::ios::binary);
+
+    if (!file.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return 1;
     }
 
-    printf("ROM loaded successfully: %s\n", filename);
+    file.read(reinterpret_cast<char*>(memory->vram), VRAM_SIZE);
+
+
+    if (!file) {
+        std::cerr << "Error reading file: " << filename << std::endl;
+        return 1;
+    }
+
+    // Output the number of bytes read
+    std::cout << "Read " << file.gcount() << " bytes from " << filename << std::endl;
+
+    // Close the file
+    file.close();
+
     return 0;
 }

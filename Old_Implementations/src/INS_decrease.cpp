@@ -1,5 +1,5 @@
 #include "memory.h"
-#include "stdio.h"
+// #include "stdio.h"
 
 void execute_decrease_1(GameboyMemory *memory, GameboyRegisters *registers){
     printf("DEC B\n");
