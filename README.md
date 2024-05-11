@@ -6,6 +6,8 @@ Trying to emulate gameboy for understanding how a CPU works in general
 ## Progress:
 1. Tile Data can now be drawn using VRAM Dump. [SampleUsed](./roms/VRAM_TEST_DATA/VRAM.dump) </br>![image](https://github.com/subratkatiyar/GameBoy_Emulator/assets/43543908/01511d30-7df6-4879-a9cc-c19dc586f7a5)
 2. Where are the colors? I don't know will start working on it.
+3. Implemented BackgroundMap and OAM. [CPU Logic is pending, OAM updates happening by reading OAM dumps. ] ![image](https://github.com/subratkatiyar/GameBoy_Emulator/assets/43543908/3d23b81f-e299-4c4d-a022-bc82c5927025)
+![ezgif-1-82a3833921](https://github.com/subratkatiyar/GameBoy_Emulator/assets/43543908/c8e8c22f-042a-4222-9584-9fff4ec368f9)
 
 
 
