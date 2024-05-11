@@ -6,7 +6,11 @@
 class DisplayUnit : public olc::PixelGameEngine
 {
 	private:
-		void DrawTiles();
+		void DrawTileMap();
+		void DrawTile(int);
+		void DrawTile(uint8_t, int, int);
+		void DrawBGMap();
+		void DrawOAM();
 		void DrawXYAxis();
 	public:
 		GameboyMemory* memory;

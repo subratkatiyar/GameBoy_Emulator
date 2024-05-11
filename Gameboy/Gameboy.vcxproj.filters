@@ -25,7 +25,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DisplayUnit.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +50,18 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="..\roms\VRAM_TEST_DATA\VRAM.dump">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\roms\VRAM_TEST_DATA\OAM.dump">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\roms\VRAM_TEST_DATA\OAM_1.dump">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\roms\VRAM_TEST_DATA\OAM_1_2.dump">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\roms\VRAM_TEST_DATA\VRAM_1.dump">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

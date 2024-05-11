@@ -74,4 +74,5 @@ class MemoryUnit {
         GameboyMemory memory;
         bool load_rom(const char*);
         bool load_vram(const char*);
+        bool load_oam(const char*);
 };

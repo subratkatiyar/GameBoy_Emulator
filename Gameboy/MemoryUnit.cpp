@@ -26,5 +26,10 @@ bool MemoryUnit::load_rom(const char* filename) {
 }
 
 bool MemoryUnit::load_vram(const char* filename) {
-	return read_binary(memory.vram, ROM_SIZE, filename);
+	return read_binary(memory.vram, VRAM_SIZE, filename);
+}
+
+bool MemoryUnit::load_oam(const char* filename)
+{
+	return read_binary(memory.oam, OAM_SIZE, filename);
 }
