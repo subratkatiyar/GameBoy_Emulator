@@ -14,8 +14,8 @@ class DisassemblyView : public olc::PixelGameEngine
 		void DrawMemory();
 		std::string ByteToHexString(uint8_t);
 	public:
-		GameboyMemory* memory;
-		DisassemblyView(GameboyMemory*);
+		GameboyMemory *memory;
+		DisassemblyView(MemoryUnit*);
 		bool OnUserCreate() override;
 		bool OnUserUpdate(float fElapsedTime) override;
 };

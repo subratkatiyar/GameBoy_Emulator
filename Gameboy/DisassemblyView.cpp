@@ -12,11 +12,11 @@ std::string DisassemblyView::ByteToHexString(uint8_t byte)
     return stream.str();
 }
 
-DisassemblyView::DisassemblyView(GameboyMemory* memoryPointer)
+DisassemblyView::DisassemblyView(MemoryUnit *memoryPointer)
 {
 	// Name your application
 	sAppName = "Disassembly View";
-    memory = memoryPointer;
+    memory = &memoryPointer->memory;
 }
 
 void DisassemblyView::DrawMemory()
@@ -41,7 +41,7 @@ void DisassemblyView::DrawMemory()
             if (i + j >= sizeof(GameboyMemory)) break;
 
             // Draw byte value
-            std::string byteStr = ByteToHexString(*((uint8_t*)memory + i + j));
+            std::string byteStr = ByteToHexString(*((uint8_t*)&memory + i + j));
             DrawString(50 + j * 3 * 5 + j * 3, yPos, byteStr, olc::WHITE);
             DrawString(50 + j * 3 * 5 + j * 3 + 10, yPos, " ", olc::WHITE);
 

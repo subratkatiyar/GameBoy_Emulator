@@ -3,6 +3,7 @@
 #include "DisplayUnit.h"
 #include "DisassemblyView.h"
 #include <thread>
+#include "CPU.h"
 
 MemoryUnit MemoryUnitObj;
 
@@ -16,41 +17,20 @@ void startDisplay() {
 	}
 }
 
-void printHello() {
-	/*for (uint8_t idx = 0x00;idx < 0xFF;idx++) {
-		if (idx % 2 == 0) {
-			MemoryUnitObj.load_oam("..\\roms\\VRAM_TEST_DATA\\OAM.dump");
-		}
-		else {
-			MemoryUnitObj.load_oam("..\\roms\\VRAM_TEST_DATA\\OAM_1_2.dump");
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(200));
-	}*/
-	
-}
 int main()
 {
-
-	
-	MemoryUnitObj.load_rom("..\\roms\\Tetris.gb");
-	MemoryUnitObj.load_vram("..\\roms\\VRAM_TEST_DATA\\VRAM.dump");
-	MemoryUnitObj.load_oam("..\\roms\\VRAM_TEST_DATA\\OAM.dump");
-
-	DisassemblyView DisassemblyViewObj(&MemoryUnitObj.memory);
-
-	
-
-	
+	DisassemblyView DisassemblyViewObj(&MemoryUnitObj);
+	CPU cpu(&MemoryUnitObj);
 	
 	std::thread t1(startDisplay);
-	std::thread t2(printHello);
+	std::thread t2(&CPU::start_execution, cpu);
 	// Join the thread with the main thread
 	t1.join();
 	t2.join();
 
-	int test = 10;
 	/*if (DisassemblyViewObj.Construct(500, 500, 2, 2))
 		DisassemblyViewObj.Start();*/
+	
 
 
 	return 0;

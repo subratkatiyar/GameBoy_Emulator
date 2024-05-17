@@ -67,12 +67,59 @@ typedef struct {
     uint16_t pc;        // Program Counter
 } GameboyRegisters;
 
+/*
+0000	3FFF	16 KiB ROM bank 00	From cartridge, usually a fixed bank
+4000	7FFF	16 KiB ROM Bank 01–NN	From cartridge, switchable bank via mapper(if any)
+
+Read from dump
+    8000	9FFF	8 KiB Video RAM(VRAM)	In CGB mode, switchable bank 0 / 1
+
+0xFF
+    A000	BFFF	8 KiB External RAM	From cartridge, switchable bank if any
+
+Seems to be random
+    C000	CFFF	4 KiB Work RAM(WRAM)
+    D000	DFFF	4 KiB Work RAM(WRAM)	In CGB mode, switchable bank 1–7
+    E000	FDFF	Echo RAM(mirror of C000–DDFF)	Nintendo says use of this area is prohibited.
+    FE00	FE9F	Object attribute memory(OAM)
+
+0x00
+    FEA0	FEFF	Not Usable	Nintendo says use of this area is prohibited.
+
+Read from dump. 0xFE30 - 0xFE3F seems to be random
+    FF00	FF7F	I / O Registers
+
+FF80	FFFE	High RAM(HRAM)
+
+0x00
+    FFFF	FFFF	Interrupt Enable register (IE)
+*/
+
+// Flag constants
+#define FLAG_Z 0b10000000 // Zero flag
+#define FLAG_N 0b01000000 // Subtract flag
+#define FLAG_H 0b00100000 // Half-carry flag
+#define FLAG_C 0b00010000 // Carry flag
+
 class MemoryUnit {
     private:
         bool read_binary(uint8_t*, uint16_t, const char*);
     public:
         GameboyMemory memory;
+        GameboyRegisters registers;
         bool load_rom(const char*);
         bool load_vram(const char*);
         bool load_oam(const char*);
+
+        void reset_eram();
+        void reset_ieregister();
+        void reset_notusuable();
+        bool load_ioregisters(const char*);
+
+        bool get_flag(uint16_t);
+        void set_flag(uint16_t, bool);
+        void checknset_halfcarry_flag(uint16_t flag);
+        uint8_t read_memory(uint16_t address);
+        uint16_t read_memory_16_le(uint16_t pc);
+        void write_memory(uint16_t address, uint8_t value);
 };

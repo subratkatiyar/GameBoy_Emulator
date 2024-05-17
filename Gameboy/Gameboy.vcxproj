@@ -127,25 +127,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CPU.h" />
     <ClInclude Include="DisassemblyView.h" />
     <ClInclude Include="DisplayUnit.h" />
     <ClInclude Include="MemoryUnit.h" />
     <ClInclude Include="olcPixelGameEngine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="COMPARE.cpp" />
+    <ClCompile Include="CPU.cpp" />
+    <ClCompile Include="DECREASE.cpp" />
     <ClCompile Include="DisassemblyView.cpp" />
     <ClCompile Include="DisplayUnit.cpp" />
+    <ClCompile Include="JUMP.cpp" />
+    <ClCompile Include="LOAD.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryUnit.cpp" />
     <ClCompile Include="olcPixelGameEngine.cpp" />
+    <ClCompile Include="UNKNOWN.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\roms\IO.dump" />
     <None Include="..\roms\Tetris.gb" />
-    <None Include="..\roms\VRAM_TEST_DATA\OAM.dump" />
-    <None Include="..\roms\VRAM_TEST_DATA\OAM_1.dump" />
-    <None Include="..\roms\VRAM_TEST_DATA\OAM_1_2.dump" />
-    <None Include="..\roms\VRAM_TEST_DATA\VRAM.dump" />
-    <None Include="..\roms\VRAM_TEST_DATA\VRAM_1.dump" />
+    <None Include="..\roms\VRAM.dump" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

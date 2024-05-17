@@ -29,8 +29,8 @@ void DisplayUnit::DrawTile(int tile_idx) // Function used for TileMap Only.
 	int tile_xPos = tile_idx % 16;
 	int tile_yPos = tile_idx / 16;
 
-	int memoryStart = (256 * tile_yPos) + (tile_xPos * 16);
-	int memoryEnd = memoryStart + 16;
+	uint32_t memoryStart = (256 * tile_yPos) + (tile_xPos * 16);
+	uint32_t memoryEnd = memoryStart + 16;
 
 	//std::cout << tile_idx << "->" << memoryStart << " " << memoryEnd << "\n";
 	for (uint32_t addr = memoryStart; addr < memoryEnd; addr += 0x02) {
@@ -67,8 +67,8 @@ void DisplayUnit::DrawTile(uint8_t tile_idx, int tile_xPos, int tile_yPos)
 	std::pair<int32_t, int32_t> RectangleDimensions = { ScreenWidth(), ScreenHeight() };
 	std::pair<int32_t, int32_t> pixelSize = { RectangleDimensions.first / 256, RectangleDimensions.second / 192 };
 
-	int memoryStart = (256 * (tile_idx / 16)) + ((tile_idx % 16) * 16);
-	int memoryEnd = memoryStart + 16;
+	uint32_t memoryStart = (256 * (tile_idx / 16)) + ((tile_idx % 16) * 16);
+	uint32_t memoryEnd = memoryStart + 16;
 
 	//std::cout << tile_idx << "->" << memoryStart << " " << memoryEnd << "\n";
 	for (uint32_t addr = memoryStart; addr < memoryEnd; addr += 0x02) {

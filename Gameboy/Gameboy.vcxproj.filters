@@ -27,6 +27,9 @@
     <ClInclude Include="DisplayUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CPU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="olcPixelGameEngine.cpp">
@@ -44,24 +47,33 @@
     <ClCompile Include="DisplayUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LOAD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DECREASE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JUMP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UNKNOWN.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="COMPARE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\roms\Tetris.gb">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\roms\VRAM_TEST_DATA\VRAM.dump">
+    <None Include="..\roms\VRAM.dump">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\roms\VRAM_TEST_DATA\OAM.dump">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\roms\VRAM_TEST_DATA\OAM_1.dump">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\roms\VRAM_TEST_DATA\OAM_1_2.dump">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\roms\VRAM_TEST_DATA\VRAM_1.dump">
+    <None Include="..\roms\IO.dump">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
